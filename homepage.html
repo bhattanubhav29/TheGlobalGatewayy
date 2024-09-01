@@ -15,11 +15,11 @@
         }
 
         header {
-            margin-top: 10px;
+            margin-top: 1vw;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 60px;
+            padding: 0 3vw;
             position: relative;
         }
 
@@ -31,7 +31,7 @@
             right: 0;
             bottom: 0;
             background: url('WhatsApp Image 2024-08-01 at 09.35.28_6eeebf12.jpg') no-repeat center center/cover;
-            filter: blur(10px);
+            filter: blur(0.5vw);
             z-index: -1;
         }
 
@@ -39,15 +39,15 @@
             display: flex;
             align-items: center;
             color: white;
-            font-size: 1em;
+            font-size: 1.5vw;
             font-weight: bold;
             position: relative;
             z-index: 1;
         }
 
         .logo img {
-            height: 150px;
-            margin-left: -20px;
+            height: 12vw;
+            margin-left: -1vw;
             border-radius: 50%;
             object-fit: cover;
             transition: transform 0.3s, opacity 0.3s;
@@ -59,19 +59,19 @@
         }
 
         .logo h2 {
-            padding-left: 20px;
+            padding-left: 1vw;
         }
 
         nav {
             display: flex;
-            gap: 60px;
+            gap: 4vw;
             z-index: 1;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            font-size: 1.1em;
+            font-size: 1.1vw;
             position: relative;
         }
 
@@ -79,11 +79,11 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
+            height: 0.1vw;
             display: block;
             background: white;
             transition: width .3s;
-            bottom: -5px;
+            bottom: -0.5vw;
             left: 0;
         }
 
@@ -95,34 +95,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 140px;
-            padding: 0 60px;
+            margin-top: 7.5vw;
+            padding: 0 3vw;
         }
 
         .beach-img {
-            width: 380px;
-            height: 380px;
+            width: 20vw;
+            height: 20vw;
             transition: transform 0.6s ease, box-shadow 0.6s ease;
-            margin-right: 30px;
-            margin-bottom: 130px;
-            margin-top: -20px;
+            margin-right: 1.5vw;
+            margin-bottom: 6.5vw;
+            margin-top: -1vw;
         }
 
         .beach-img:hover {
             transform: scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0.75vw 1.5vw rgba(0, 0, 0, 0.5);
         }
 
         .text {
-            margin-top: -150px;
-            margin-left: 80px;
-            max-width: 280px;
+            margin-top: -7.5vw;
+            margin-left: 4vw;
+            max-width: 15vw;
         }
 
         .text h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            max-width: 200px;
+            font-size: 2vw;
+            margin-bottom: 1vw;
+            max-width: 10vw;
             font-weight: bolder;
         }
 
@@ -130,20 +130,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 0.5vw;
             width: 100%;
-            max-width: 280px;
-            margin-top: 20px;
+            max-width: 15vw;
+            margin-top: 1vw;
         }
 
         .input-group input,
         .input-group button {
             width: 100%;
-            height: 50px;
+            height: 2.5vw;
             border: none;
-            padding: 0 15px;
-            font-size: 1em;
-            margin-left: 28px;
+            padding: 0 0.75vw;
+            font-size: 1vw;
+            margin-left: 1.4vw;
         }
 
         .input-group input {
@@ -157,7 +157,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s, color 0.3s;
-            margin-bottom: 20px;
+            margin-bottom: 1vw;
         }
 
         .input-group button:hover {
@@ -170,16 +170,16 @@
             color: white;
             display: flex;
             align-items: center;
-            padding-left: 60px;
+            padding-left: 3vw;
             background: url('WhatsApp Image 2024-08-01 at 09.35.28_6eeebf12.jpg') no-repeat center center/cover;
         }
 
         .hero-section .overlay {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
+            top: 0.5vw;
+            left: 0.5vw;
+            right: 0.5vw;
+            bottom: 0.5vw;
         }
 
         .hero-section .hero-content {
@@ -188,54 +188,64 @@
         }
 
         .hero-section h2 {
-            font-size: 3em;
-            max-width: 500px;
+            font-size: 4vw;
+            max-width: 26vw;
             margin: 0;
         }
 
         .hero-section p {
-            font-size: 1em;
-            margin: 50px 0;
+            font-size: 1.2vw;
+            margin: 2.5vw 0;
         }
 
         .hero-section button {
             position: relative;
-            padding: 1.2rem 1.5rem;
-            font-size: 1em;
-            background-color: hsla(0, 0%, 100%, .2);
+            padding: 1.2vw 1.5vw;
+            font-size: 1vw;
+            background-color: grey;
             border: none;
             align-items: center;
             font-family: Arial, Helvetica, sans-serif;
-            font-weight:bold;
+            font-weight: bold;
             display: inline-flex;
-            color: whitesmoke;
+            color: black;
             cursor: pointer;
-            -webkit-backdrop-filter: blur(24px);
-            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(1.2vw);
+            backdrop-filter: blur(1.2vw);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .hero-section button:hover {
+            background-color: black;
+        }
+        
+        .hero-section button a {
+            text-decoration: none;
+            color: whitesmoke;
         }
 
         .destinations {
             display: flex;
             flex-wrap: wrap; 
             gap: 0;
-            background: hsla(217, 100%, 50%, 1);background: linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);background: -moz-linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);background: -webkit-linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#0061FF%22,%20endColorstr=%22#60EFFF%22,%20GradientType=1%20");
+            background: linear-gradient(90deg, hsla(217, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
         }
 
         .destination {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 14vw;
+            height: 14vw;
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5em;
-            text-shadow: 0 0 5px black;
+            font-size: 1.5vw;
+            text-shadow: 0 0 0.25vw black;
             flex-grow: 1; 
             transition: flex-grow 0.5s; 
-            margin: 10px; 
+            margin: 0.5vw; 
         }
 
         .destination:hover {
@@ -248,9 +258,9 @@
         }
 
         footer {
-           background: hsla(213, 77%, 14%, 1);background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);background: -moz-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);background: -webkit-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E%22,%20endColorstr=%22#557C93%22,%20GradientType=1%20");
+           background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
             color: #fff;
-            padding: 10px 10px;
+            padding: 0.5vw 0.5vw;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
@@ -259,9 +269,9 @@
         }
 
         .footer-section {
-            margin: 20px;
+            margin: 1vw;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(1vw);
             transition: opacity 0.5s, transform 0.5s;
         }
 
@@ -271,12 +281,12 @@
         }
 
         .footer-section h3 {
-            font-size: 1em;
-            margin-bottom: 10px;
+            font-size: 1.5vw;
+            margin-bottom: 0.5vw;
         }
 
         .footer-section p, .footer-section ul {
-            font-size: 1em;
+            font-size: 1vw;
             margin: 0;
         }
 
@@ -286,7 +296,7 @@
         }
 
         .footer-section ul li {
-            margin: 5px 0;
+            margin: 0.25vw 0;
         }
 
         .footer-section ul li a {
@@ -303,91 +313,92 @@
             width: 100%;
             text-align: center;
             opacity: 0; 
-            transform: translateY(20px); 
+            transform: translateY(1vw); 
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         footer:hover p {
-            opacity: 1; 
+            opacity: 1;
             transform: translateY(0); 
         }
 
-        @media (max-width: 768px) {
+        @media screen and (max-width: 768px) {
             header {
                 flex-direction: column;
                 align-items: center;
-                padding: 0 20px;
-            }
-
-            .logo img {
-                height: 120px;
-                width: 120px;
-            }
-
-            .logo h2 {
-                font-size: 1.2em;
-                padding-left: 10px;
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .hero-section {
-                padding-left: 20px;
-                text-align: center;
-            }
-
-            .hero-section h2 {
-                font-size: 2.5em;
-            }
-
-            .hero-section p {
-                font-size: 1em;
-            }
-
-            .hero-section button {
-                width: 100%;
             }
 
             .container {
                 flex-direction: column;
-                margin-top: 60px;
-                padding: 0 20px;
-            }
-
-            .beach-img {
-                margin: 0 0 30px;
-                width: 300px;
-                height: 300px;
-            }
-
-            .text {
-                margin: 0;
-                text-align: center;
-            }
-
-            .input-group {
-                max-width: 100%;
-            }
-
-            .destinations {
-                flex-direction: column;
                 align-items: center;
+                margin-top: 5vw;
+            }
+
+            .logo h2 {
+                font-size: 2vw;
+                margin: 1vw 0;
+            }
+
+            .text h1 {
+                font-size: 3vw;
+            }
+
+            nav a {
+                font-size: 2vw;
+            }
+
+            .hero-section h2 {
+                font-size: 5vw;
+            }
+
+            .hero-section p {
+                font-size: 2vw;
+            }
+
+            .hero-section button {
+                font-size: 2vw;
+                padding: 2vw 4vw;
+            }
+
+            .footer-section {
+                flex-basis: 100%;
+                margin-bottom: 2vw;
             }
 
             .destination {
-                width: 100%;
-                height: 200px;
-                margin: 0;
+                flex-basis: calc(50% - 1vw);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .logo img {
+                height: 10vw;
             }
 
-            footer {
-                flex-direction: column;
-                align-items: center;
+            .hero-section h2 {
+                font-size: 6vw;
             }
 
+            .hero-section p {
+                font-size: 2.5vw;
+            }
+
+            .hero-section button {
+                font-size: 3vw;
+                padding: 3vw 6vw;
+            }
+
+            .footer-section h3 {
+                font-size: 2.5vw;
+            }
+
+            .footer-section p, .footer-section ul {
+                font-size: 2vw;
+            }
+
+            .destination {
+                flex-basis: calc(100% - 1vw);
+            }
         }
     </style>
 </head>
@@ -398,9 +409,9 @@
             <h2>The Global Gateway</h2>
         </div>
         <nav>
-            <a href="#home">Home</a>
+            <a href="homepage.html">Home</a>
             <a href="#about">About</a>
-            <a href="#popular">Explore</a>
+            <a href="explore.html">Explore</a>
             <a href="shop.html">Shop</a>
         </nav>
     </header>
@@ -410,7 +421,7 @@
             <h1>Welcome To Travel</h1>
             <h2>Explore The World</h2>
             <p>Live the trips exploring the world, discover paradises, islands, mountains and much more, get your trip now.</p>
-            <button>Start Your Journey</button>
+            <button type="button"><a href="explore.html">Start Your Journey</a></button>
         </div>
     </div>
 
