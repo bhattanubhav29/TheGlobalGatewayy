@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Trip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background-image: url("travel.jpg");
+            overflow-x: hidden;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        
+        body h1{
+            font-family: "Merienda", cursive;
+            font-optical-sizing: auto;
+            font-weight: bold;
+            font-style: normal;
+            text-align: center;
+            font-size: 4.5vw;
+            text-shadow: 0 0 5px #00b7ff, 0 0 15px #00ffdd, 0 0 20px #000000, 0 0 40px #000000, 0 0 60px #73a7d8, 0 0 10px #000000, 0 0 98px #000000;
+            color: #ffffff;
+        }
+
+        body h2{
+            font-family: "Merienda", cursive;
+            font-optical-sizing: auto;
+            font-weight: bold;
+            font-style: normal;
+            font-size: 3vw;
+            text-align: center;
+        }
+        
+        header {
+            margin-top: 1vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 8vw;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Blurring effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            transition: background 0.3s ease-in-out;
+        }
+        
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.2); /* Adjust background on scroll if needed */
+        }
+
+        header h2{
+            color: whitesmoke;
+        }
+        
+        .places img{
+            height: 22vw;
+            width: 22vw;
+            margin-left: 4vw;
+        }
+        
+        #budgetForm h2{
+            font-weight: bolder;
+            font-family: "Baskervville SC", serif;
+            font-style: normal;
+            font-size: 2vw;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: rgba(0, 0, 0, 0.815);
+            font-size: 1.5vw;
+            font-weight: bold;
+        
+        }
+        
+        .logo img {
+            height: 12vw;
+            margin-right: 1vw;
+            margin-left: -2vw;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        
+        .logo img:hover {
+            transform: scale3d(0.9, 0.9, 0.9);
+        }
+
+        nav {
+            display: flex;
+            gap: 4vw;
+        }
+        
+        nav a {
+            color: whitesmoke;
+            text-decoration: none;
+            font-size: 1.5vw;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0.2vw;
+            display: block;
+            background: white;
+            transition: width .3s;
+            bottom: -0.5vw;
+            left: 0;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .places {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2vw;
+        }
+        
+        .places .destination-card {
+            position: relative;
+            width: 25vw;
+            height: 25vw;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .places .destination-card img {
+            width: 25vw;
+            height: 25vw;
+            margin: 0;
+            padding: 0;
+            border-bottom: 2px solid #fff;
+        }
+        
+        .places .destination-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        .places .destination-card h3 {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5vw 0;
+            margin: 0;
+            font-size: 1.5vw;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .places input[type="radio"] {
+            display: none;
+        }
+        
+        .places input[type="radio"]:checked + .destination-card {
+            border: 3px solid #00b7ff;
+            box-shadow: 0 12px 24px rgba(0, 183, 255, 0.4);
+        }
+        
+        .tourist-spots-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2vw;
+            padding: 2vw;
+            border-radius: 10px;
+            background-image: url("bmbg.webp");
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            backdrop-filter: blur(8px); /* Blurring effect */
+        }
+        
+        .tourist-spots h2 {
+            font-family: "Baskervville SC", serif;
+            font-weight: bold;
+            font-size: 2vw;
+            margin-bottom: 1vw;
+            color: #007BFF; /* Attractive blue color */
+        }
+        
+        .tourist-spots label {
+            display: block;
+            padding: 1vw;
+            margin: 0.5vw 0;
+            font-size: 1.2vw;
+            color: #333;
+            background: rgba(152, 154, 155, 0.747);
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .tourist-spots label:hover {
+            background: rgba(255, 255, 255, 0.918);
+            transform: scale(1.02);
+        }
+        
+        .tourist-spots input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .duration-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-image: url('join-island.jpg');
+            background-size: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            backdrop-filter: blur(10px);
+        }
+        
+        .duration-container label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .duration-container select {
+            font-size: 1em;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 15px; /* Space between dropdowns */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        }
+        
+        .duration-container select:hover {
+            background-color: #0056b3;
+        }
+        
+        .duration-container select:focus {
+            outline: none;
+            border-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        .number {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-image: url("people.jpg");
+            background-size: 98vw;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            backdrop-filter: blur(20px); 
+        }
+        
+        .number label{
+            font-size: 1.5vw;
+            font-weight: bolder;
+        }
+        
+        .stay-meals-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-image: url('stay.jpg');
+            background-size: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .stay-meals-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vw;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .stay-meals-options .option {
+            display: flex;
+            align-items: center;
+            background: rgba(148, 150, 147, 0.788);
+            padding: 1vw;
+            border-radius: 10px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .stay-meals-options .option:hover {
+            background: rgba(255, 255, 255, 0.89);
+            transform: scale(1.02);
+        }
+
+        footer {
+            background: hsla(213, 77%, 14%, 1);
+            background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+            color: #fff;
+            padding: .5vw;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-section {
+            margin: 2vw;
+            opacity: 0;
+            transform: translateY(2vw);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        footer:hover .footer-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5vw;
+            margin-bottom: 1vw;
+        }
+        
+        .footer-section p, .footer-section ul {
+            font-size: 1.2vw;
+            margin: 0;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin: 0.5vw 0;
+        }
+        
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ccc;
+        }
+        
+        footer p {
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(2vw); 
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        footer:hover p {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    </style>
+</head>
+<header>
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+        <h2>The Global Gateway</h2>
+    </div>
+    <nav>
+        <a href="homepage.html">Home</a>
+        <a href="aboutus.html">About</a>
+        <a href="explore.html">Explore</a>
+        <a href="shop.html">Shop</a>
+    </nav>
+</header>
+<body>
+    <h1 align="center">Plan Your Trip</h1>
+    <form id="budgetForm"></form>
+    
+    <div class="places">
+        <label>
+            <input type="radio" name="destination" value="Place1" onclick="updateTouristSpots()">
+            <div class="destination-card">
+                <img src="delhi.jpg" alt="Place1">
+                <h3>Delhi</h3>
+            </div>
+        </label>
+        <label>
+            <input type="radio" name="destination" value="Place2" onclick="updateTouristSpots()">
+            <div class="destination-card">
+                <img src="paris.jpg" alt="Place 2">
+                <h3>Paris</h3>
+            </div>
+        </label>
+        <label>
+            <input type="radio" name="destination" value="Place3" onclick="updateTouristSpots()">
+            <div class="destination-card">
+                <img src="rome.jpg" alt="Place 3">
+                <h3>Rome</h3>
+            </div>
+        </label>
+    </div>
+    <div class="tourist-spots-container">
+        <h2>Select Tourist Spots</h2>
+        <div id="touristSpots" class="tourist-spots">
+        </div>
+    </div>
+    
+    <div class="duration-container">
+        <label for="duration">Select Days:</label>
+        <select id="days" name="days">
+            <option value="1">1 Day</option>
+            <option value="2">2 Days</option>
+            <option value="3">3 Days</option>
+            <option value="4">4 Days</option>
+            <option value="5">5 Days</option>
+            <option value="6">6 Days</option>
+            <option value="7">7 Days</option>
+        </select>
+    
+        <label for="nights">Select Nights:</label>
+        <select id="nights" name="nights">
+            <option value="0">0 Nights</option>
+            <option value="1">1 Night</option>
+            <option value="2">2 Nights</option>
+            <option value="3">3 Nights</option>
+            <option value="4">4 Nights</option>
+            <option value="5">5 Nights</option>
+            <option value="6">6 Nights</option>
+            <option value="7">7 Nights</option>
+        </select>
+    </div>
+    <div class="number">
+        <h2>Number of People</h2>
+        <label for="people">Adults: <input type="number" name="adults" min="1" value="1"></label><br>
+        <label for="people">Children: <input type="number" name="children" min="0" value="0"></label><br>
+    </div>
+    <div class="stay-meals-container">
+        <h2>Hotel and Meals</h2>
+        <div class="stay-meals-options">
+            <div class="option">
+                <input type="checkbox" id="hotel" name="hotel" value="Hotel">
+                <label for="hotel">Stay in Hotel</label>
+            </div>
+            <div class="option">
+                <input type="checkbox" id="breakfast" name="meals" value="Breakfast">
+                <label for="breakfast">Breakfast</label>
+            </div>
+            <div class="option">
+                <input type="checkbox" id="lunch" name="meals" value="Lunch">
+                <label for="lunch">Lunch</label>
+            </div>
+            <div class="option">
+                <input type="checkbox" id="dinner" name="meals" value="Dinner">
+                <label for="dinner">Dinner</label>
+            </div>
+            <div class="option">
+                <input type="checkbox" id="travel" name="travel" value="Travel">
+                <label for="travel">Travel through Bus</label>
+            </div>
+        </div>
+    </div>
+    
+    <button type="button" onclick="calculateBudget()">Calculate Budget</button>
+</form>
+
+<h2 id="result"></h2>
+
+<script>
+    document.querySelectorAll('select').forEach(selectElement => {
+        selectElement.addEventListener('change', function () {
+            this.style.transition = 'none';
+            this.style.transform = 'scale(1.1)';
+
+            setTimeout(() => {
+                this.style.transition = 'transform 0.3s ease';
+                this.style.transform = 'scale(1)';
+            }, 50);
+        });
+    });
+
+    const touristSpotsData = {
+        "Place1": ["Red Fort", "Qutub Minar", "India Gate", "Lotus Temple"],
+        "Place2": ["Eiffel Tower", "Louvre Museum", "Palais Garnier", "Champs-Elysees"],
+        "Place3": ["Colosseum", "Vatican City", "Trevi Fountain", "Pantheon"]
+    };
+
+    function updateTouristSpots() {
+        const selectedPlace = document.querySelector('input[name="destination"]:checked').value;
+        const touristSpots = touristSpotsData[selectedPlace];
+        const touristSpotsDiv = document.getElementById('touristSpots');
+
+        // Clear previous tourist spots
+        touristSpotsDiv.innerHTML = '';
+
+        // Add new tourist spots based on the selected destination
+        touristSpots.forEach(spot => {
+            const spotLabel = document.createElement('label');
+            spotLabel.innerHTML = `<input type="checkbox" name="spots" value="${spot}"> ${spot}`;
+            touristSpotsDiv.appendChild(spotLabel);
+            touristSpotsDiv.appendChild(document.createElement('br'));
+        });
+    }
+
+    function calculateBudget() {
+        const days = parseInt(document.getElementById('days').value);
+        const nights = parseInt(document.getElementById('nights').value);
+        const spots = document.querySelectorAll('input[name="spots"]:checked').length;
+        const hotel = document.querySelector('input[name="hotel"]:checked');
+        const meals = document.querySelectorAll('input[name="meals"]:checked').length;
+
+        const adults = parseInt(document.querySelector('input[name="adults"]').value);
+        const children = parseInt(document.querySelector('input[name="children"]').value);
+
+        // Base costs for different places
+        const rates = {
+            "Place1": { baseCost: 4999, spotCost: 1999, hotelCost: 2499, mealCost: 299 },
+            "Place2": { baseCost: 24999, spotCost: 9999, hotelCost: 21999, mealCost: 2499 },
+            "Place3": { baseCost: 19000, spotCost: 5999, hotelCost: 14999, mealCost: 1799 }
+        };
+
+        const selectedPlace = document.querySelector('input[name="destination"]:checked').value;
+        const rate = rates[selectedPlace];
+
+        if (!rate) {
+            document.getElementById('result').textContent = 'Please select a destination.';
+            return;
+        }
+
+        const adultCost = (rate.baseCost * days + rate.spotCost * spots + (hotel ? rate.hotelCost * nights : 0) + rate.mealCost * meals * days) * adults;
+        const childCost = ((rate.baseCost * days + rate.spotCost * spots + (hotel ? rate.hotelCost * nights : 0) + rate.mealCost * meals * days) / 2) * children;
+
+        const totalCost = adultCost + childCost;
+
+        document.getElementById('result').textContent = `Estimated Budget: ₹${totalCost.toFixed(2)}`;
+    }
+</script>
+</body>
+<footer id="footer">
+    <div class="footer-section">
+        <h3>The Global Gateway</h3>
+        <p>Travel with us and explore the world without limits.</p>
+    </div>
+    <div class="footer-section">
+        <h3>About</h3>
+        <ul>
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#news-blog">News & Blog</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Contact</h3>
+        <ul>
+            <li><a href="#call-center">Call Center</a></li>
+            <li><a href="#support-center">Support Center</a></li>
+            <li><a href="#contact-us">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+            <li><a href="#privacy-policy">Privacy Policy</a></li>
+            <li><a href="#terms-services">Terms & Services</a></li>
+            <li><a href="#payments">Payments</a></li>
+        </ul>
+    </div>
+    <p>&copy; 2024 The Global Gateway. All rights reserved.</p>
+</footer>
+</html>
