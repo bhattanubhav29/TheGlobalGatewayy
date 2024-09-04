@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <style>
+        /* Retained previous CSS */
+        body {
+            
+            padding: 0;
+            background: linear-gradient(90deg, rgba(135,206,250,1) 0%, rgba(144,238,144,1) 100%);
+            color: #fff;
+            margin: 0;
+            font-family: "Nunito", sans-serif;
+        }
+
+        header {
+            margin-top: 1vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8vw;
+            position: relative;
+            z-index: 100;
+        }
+
+        header h2{
+            color: whitesmoke;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5vw;
+            font-weight: bold;
+        }
+        
+        .logo img {
+            height: 12vw;
+            margin-right: 1vw;
+            margin-left: -2vw;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        
+        .logo img:hover {
+            transform: scale3d(0.9, 0.9, 0.9);
+        }
+
+        nav {
+            display: flex;
+            gap: 4vw;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5vw;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0.2vw;
+            display: block;
+            background: white;
+            transition: width .3s;
+            bottom: -0.5vw;
+            left: 0;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .container{
+            margin-left: 30vw;
+            margin-right: 30vw;
+            margin-bottom: 2vw;
+            align-items: center;
+        }
+
+        .checkout-section {
+            backdrop-filter : blur(1vw);
+            color: #333;
+            align-items: center;
+            padding: 2vw;
+            border-radius: 1vw;
+            box-shadow: 0 0.4vw 1vw rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-section h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 2em;
+            margin-bottom: 2vw;
+        }
+
+        .checkout-section .form-group {
+            margin-bottom: 1.5vw;
+        }
+
+        .checkout-section .form-group label {
+            display: block;
+            margin-bottom: 0.5vw;
+            font-weight: bold;
+        }
+
+        .checkout-section .form-group input,
+        .checkout-section .form-group select {
+            width: 95%;
+            padding: 1vw;
+            border-radius: 0.5vw;
+            border: 0.1vw solid #ccc;
+        }
+
+        .checkout-section .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 1vw;
+        }
+
+        .checkout-section .form-group .checkbox-label {
+            display: inline-block;
+            margin-left: 1vw;
+        }
+
+        .checkout-section .additional-info {
+            display: none;
+            margin-top: 1.5vw;
+        }
+
+        .checkout-section .additional-info label {
+            display: block;
+            margin-bottom: 0.5vw;
+            font-weight: bold;
+        }
+
+        .checkout-section .checkout-btn {
+            background-color: #32a1cd;
+            color: #fff;
+            border: none;
+            padding: 1vw 2vw;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .checkout-section .checkout-btn:hover {
+            background-color: #228B22;
+            transform: translateY(-0.2vw);
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: darkblue;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: black;
+        }
+
+
+        #cartItems .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #cartItems .cart-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        #cartItems .cart-item span {
+            margin-right: 10px;
+        }
+
+        #cartTotal {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        footer {
+            background: hsla(213, 77%, 14%, 1);
+            background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+            color: #fff;
+            padding: .5vw;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-section {
+            margin: 2vw;
+            opacity: 0;
+            transform: translateY(2vw);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        footer:hover .footer-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5vw;
+            margin-bottom: 1vw;
+        }
+        
+        .footer-section p, .footer-section ul {
+            font-size: 1.2vw;
+            margin: 0;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin: 0.5vw 0;
+        }
+        
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ccc;
+        }
+        
+        footer p {
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(2vw); 
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        footer:hover p {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        @media (max-width: 768px) {
+            .checkout-section .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .checkout-section .item img {
+                margin-bottom: 1vw;
+            }
+        }
+
+        /* New CSS for Cart Summary */
+        #cartSummary {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #cartItems .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #cartItems .cart-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        #cartItems .cart-item span {
+            margin-right: 10px;
+        }
+
+        #cartTotal {
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <h2>The Global Gateway</h2>
+        </div>
+        <nav>
+            <a href="homepage.html">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="explore.html">Explore</a>
+            <a href="shop.html">Shop</a>
+        </nav>
+    </header>
+    <main>
+          <div class="container">
+            <div class="checkout-section">
+                <div id="cart-items" class="cart-items"></div>
+                <h2>Billing Information</h2>
+                <form id="checkoutForm">
+                    <div id="cartSummary">
+                        <h2>Items in Your Cart</h2>
+                        <div id="cartItems"></div>
+                        <h3>Total: ₹<span id="cartTotal"></span></h3>
+                    </div>
+                    <label for="name">First Name:</label>
+                    <input type="text" id="name" name="name" required><br><br>
+                    
+                    <label for="surname">Surname:</label>
+                    <input type="text" id="surname" name="surname" required><br><br>
+
+                    <label for="contact">Contact Number:</label>
+                    <input type="text" id="contact" name="contact" required><br><br>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="address">House Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="creditCard">Credit Card</option>
+                <option value="debitCard">Debit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="cod">Cash on Delivery</option>
+            </select><br><br>
+
+            <!-- Credit/Debit Card Details -->
+            <div id="cardDetails" style="display: none;">
+                <label for="cardHolderName">Card Holder Name:</label>
+                <input type="text" id="cardHolderName" name="cardHolderName"><br><br>
+
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" id="cardNumber" name="cardNumber"><br><br>
+
+                <label for="cardExp">Expiration Date:</label>
+                <input type="text" id="cardExp" name="cardExp"><br><br>
+
+                <label for="vcc">VCC Number:</label>
+                <input type="text" id="vcc" name="vcc"><br><br>
+            </div>
+
+            <!-- PayPal ID -->
+            <div id="paypalDetails" style="display: none;">
+                <label for="paypalId">PayPal ID:</label>
+                <input type="email" id="paypalId" name="paypalId"><br><br>
+            </div>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </main>
+
+    <footer id="footer">
+        <div class="footer-section">
+            <h3>The Global Gateway</h3>
+            <p>Travel with us and explore the world without limits.</p>
+        </div>
+        <div class="footer-section">
+            <h3>About</h3>
+            <ul>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#news-blog">News & Blog</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <ul>
+                <li><a href="#call-center">Call Center</a></li>
+                <li><a href="#support-center">Support Center</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#privacy-policy">Privacy Policy</a></li>
+                <li><a href="#terms-services">Terms & Services</a></li>
+                <li><a href="#payments">Payments</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2024 The Global Gateway. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to display cart items and total on the checkout page
+        function displayCartOnCheckout() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+
+            // Retrieve cart data from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let total = 0;
+
+            cartItemsContainer.innerHTML = ''; // Clear any existing items
+
+            // Check if the cart is empty
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotalElement.textContent = '0.00';
+                return;
+            }
+
+            cart.forEach(item => {
+                // Validate image path
+                const imageUrl = item.image || 'default-image-path.jpg'; // Fallback to default image
+
+                const itemRow = document.createElement('div');
+                itemRow.classList.add('cart-item');
+                itemRow.innerHTML = `
+                    <img src="${imageUrl}" alt="${item.name}" class="cart-item-image" onerror="this.src='default-image-path.jpg';">
+                    <span>${item.name}</span>
+                    <span>Quantity: ${item.quantity}</span>
+                    <span>Price: ₹${Number(item.price).toFixed(2)}</span>
+                `;
+                cartItemsContainer.appendChild(itemRow);
+                total += item.quantity * Number(item.price); // Ensure price is treated as a number
+            });
+
+            cartTotalElement.textContent = total.toFixed(2); // Correctly format total price
+        }
+
+        // Display the payment fields based on selected payment method
+        document.getElementById('paymentMethod').addEventListener('change', function() {
+            const cardDetails = document.getElementById('cardDetails');
+            const paypalDetails = document.getElementById('paypalDetails');
+
+            cardDetails.style.display = 'none';
+            paypalDetails.style.display = 'none';
+
+            if (this.value === 'creditCard' || this.value === 'debitCard') {
+                cardDetails.style.display = 'block';
+            } else if (this.value === 'paypal') {
+                paypalDetails.style.display = 'block';
+            }
+        });
+
+        // Load cart items and total when the page is loaded
+        window.onload = displayCartOnCheckout;
+    </script>
+    
+
+</body>
+</html>

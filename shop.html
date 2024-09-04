@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Equipment Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url(background.jpg);
+            margin: 0;
+            font-family: "Nunito", sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(26,9,121,0.3702731092436975) 41%, rgba(0,212,255,1) 100%);
+        }
+        
+        header {
+            margin-top: 1vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8vw;
+            position: relative;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5vw;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 12vw;
+            margin-right: 1vw;
+            margin-left: -2vw;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        
+        .logo img:hover {
+            transform: scale3d(0.9, 0.9, 0.9);
+        }
+        
+        nav {
+            display: flex;
+            gap: 4vw;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5vw;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0.2vw;
+            display: block;
+            background: white;
+            transition: width .3s;
+            bottom: -0.5vw;
+            left: 0;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero-section {
+            background: url('travel-equipment.jpg') no-repeat center center/cover;
+            height: 15.6vw;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1vw;
+            box-shadow: 0vw rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 3vw;
+            margin: 0;
+            text-shadow: 0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-section p {
+            font-size: 1.5vw;
+            margin: 1vw 0;
+            line-height: 1.4;
+        }
+        
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1vw;
+            padding: 2vw 1vw;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1vw;
+            box-shadow: 0 0.8vw 1vw rgba(0, 0, 0, 0.15);
+            width: 15vw;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-0.5vw);box-shadow: 0 1.2vw 2.4vw rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
+        
+        .product-card h3 {
+            font-family: 'Lora', serif;
+            font-weight: bolder;
+            font-size: 1.5vw;
+            margin: 0.5vw 0;
+            color: #222;
+        }
+        
+        .product-card p {
+            font-size: 1.2vw;
+            color: #555;
+            margin-bottom: 1vw;
+        }
+        
+        .product-card button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.8vw 1vw;
+            cursor: pointer;
+            font-size: 1vw;
+            border-radius: 1.2vw;
+            margin-bottom: 1vw;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .product-card button:hover {
+            background: #ffcc00;
+            color: #333;
+            transform: translateY(-0.3vw);
+        }
+        
+        .product-card .add-to-cart {
+            background: #4CAF50;
+            margin-top: 1vw;
+        }
+        
+        .product-card .added-to-cart {
+            background: #28a745;
+            color: white;
+            cursor: default;
+        }
+        
+        .cart-icon-container {
+            position: relative;
+        }
+        
+        .cart-icon {
+            width: 2.5vw;
+            height: 2.5vw;
+            background: url('cart-icon.png') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 1.5vw;
+            height: 1.5vw;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8vw;
+            font-weight: bold;
+        }
+        
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dialog-content {
+            background: #fff;
+            border-radius: 1vw;
+            padding: 2vw;
+            width: 80%;
+            max-width: 50vw;
+            position: relative;
+        }
+        
+        .dialog-content h2 {
+            margin-top: 0;
+        }
+        
+        .dialog-content .close-btn {
+            position: absolute;
+            top: 1vw;
+            right: 1vw;
+            cursor: pointer;
+            font-size: 1.5vw;
+            color: #333;
+        }
+        
+        .dialog-content .product-list {
+            margin-top: 1vw;
+        }
+        
+        .dialog-content .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1vw;
+        }
+        
+        .dialog-content .product-item img {
+            width: 6vw;
+            height: 6vw;
+            object-fit: cover;
+            margin-right: 1vw;
+        }
+        
+        .dialog-content .product-item .product-info {
+            flex-grow: 1;
+        }
+        
+        .dialog-content .product-item .product-info p {
+            margin: 0;
+        }
+        
+        .dialog-content .total {
+            font-weight: bold;
+            margin-top: 1vw;
+        }
+        
+        .checkout-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: .5vw 1vw;
+            font-size: 1vw;
+            font-weight: bold;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 1vw;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-0.2vw);
+        }
+        
+        footer {
+            background: hsla(213, 77%, 14%, 1);
+            background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+            color: #fff;
+            padding: .5vw;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-section {
+            margin: 2vw;
+            opacity: 0;
+            transform: translateY(2vw);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        footer:hover .footer-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5vw;
+            margin-bottom: 1vw;
+        }
+        
+        .footer-section p, .footer-section ul {
+            font-size: 1.2vw;
+            margin: 0;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin: 0.5vw 0;
+        }
+        
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ccc;
+        }
+        
+        footer p {
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(2vw); 
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        footer:hover p {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        @media screen and (max-width: 768px) {
+            .hero-section {
+                height: 10vw;
+                padding: 0 1vw;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2vw;
+            }
+            
+            .hero-section p {
+                font-size: 1vw;
+            }
+            
+            .products {
+                padding: 2vw 1vw;
+            }
+            
+            .product-card {
+                width: 100%;
+                margin-bottom: 2vw;
+            }
+            
+            nav a {
+                font-size: 1.2vw;
+            }
+            
+            header {
+                padding: 0 5vw;
+                flex-direction: column;
+                gap: 1vw;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 1.2vw;
+            }
+            
+            footer {
+                font-size: 1vw;
+            }
+            
+            .footer-section {
+                margin-bottom: 1vw;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .hero-section {
+                height: 8vw;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.8vw;
+            }
+            
+            .products {
+                flex-direction: column;
+            }
+            
+            .product-card img {
+                height: 10vw;
+            }
+
+            .product-card h3 {
+                font-size: 1.2vw;
+            }
+            
+            .product-card p, .product-card button {
+                font-size: 0.9vw;
+            }
+            
+            nav a {
+                font-size: 1vw;
+            }
+            
+            footer {
+                font-size: 0.8vw;
+                padding: 1vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <h2>The Global Gateway</h2>
+        </div>
+        <nav>
+            <a href="homepage.html">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="explore.html">Explore</a>
+            <a href="shop.html">Shop</a>
+        </nav>
+        <div class="cart-icon-container">
+            <div class="cart-icon" onclick="openCart()">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                  </svg>
+                  
+            </div>
+            <div id="cart-badge" class="cart-badge">0</div>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Travel Equipment Store</h1>
+            <p>Find the best gear for your adventures. Explore our wide range of travel equipment now!</p>
+        </div>
+    </div>
+
+    <div class="products">
+        <div class="product-card">
+            <img src="travelbag.jpg" alt="Backpack">
+            <h3>Travel Backpack</h3>
+            <p>₹4,999</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Travel Backpack', 4999, 'travelbag.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="hardcase.jpg" alt="Suitcase">
+            <h3>Hard Case Suitcase</h3>
+            <p>₹9,999</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Hard Case Suitcase', 9999, 'hardcase.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="camera.jpg" alt="Camera">
+            <h3>Travel Camera</h3>
+            <p>₹19,999</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Travel Camera', 19999, 'camera.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="charger.jpg" alt="charger">
+            <h3>All-in-one Charger</h3>
+            <p>₹999</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('All-in-one Charger', 999, 'charger.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="bottleset.jpg" alt="bottleset">
+            <h3>Toiletries Bottle-set</h3>
+            <p>₹799</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Toiletries Bottle-set', 799, 'bottleset.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="key.jpg" alt="key">
+            <h3>Key case</h3>
+            <p>₹399</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Key Case', 199, 'key.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="mask.jpg" alt="mask">
+            <h3>Eye-mask</h3>
+            <p>₹299</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Eye-mask', 199, 'mask.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="lights.jpg" alt="lights">
+            <h3>Flash Lights</h3>
+            <p>₹199</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Flash Light', 199, 'lights.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="sleepingbag.jpg" alt="sleeping bag">
+            <h3>Sleeping Bag</h3>
+            <p>₹6,499</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Sleeping Bag', 6499, 'sleepingbag.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="travelpillow.jpg" alt="travelpillow">
+            <h3>Travel Pillow</h3>
+            <p>₹399</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Travel Pillow', 399, 'travelpillow.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="wallet.jpg" alt="Wallet">
+            <h3>Wallet</h3>
+            <p>₹999</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Wallet', 999, 'wallet.jpg')">Add to Cart!</button>
+        </div>
+        <div class="product-card">
+            <img src="hangers.webp" alt="hangers">
+            <h3>Foldable hangers</h3>
+            <p>₹1099</p>
+            <button>Buy Now</button>
+            <button class="add-to-cart" onclick="addToCart('Foldable hangers', 1099, 'hangers.webp')">Add to Cart!</button>
+        </div>
+    </div>
+    
+    <div id="cart-dialog" class="dialog-overlay">
+        <div class="dialog-content">
+            <span class="close-btn" onclick="closeCart()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items" class="product-list"></div>
+            <div id="cart-total" class="total">Total: ₹0</div>
+            <button class="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+        </div>
+    </div>
+    
+
+    <script>
+        let cart = [];
+        
+        function addToCart(name, price, imgSrc) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name, price, imgSrc, quantity: 1 });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Added to Cart!');
+
+            updateCartBadge();
+        }
+        
+        function updateCartBadge() {
+            const cartBadge = document.getElementById('cart-badge');
+            cartBadge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+        
+        function getQuantity(name) {
+            const item = cart.find(item => item.name === name);
+            return item ? item.quantity : 0;
+        }
+        
+        function updateCartItem(name, newQuantity) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                if (newQuantity <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                } else {
+                    item.quantity = newQuantity;
+                }
+                updateCart();
+            }
+        }
+        
+        function updateCart() {
+            const dialog = document.getElementById('cart-dialog');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+        
+            cartItems.innerHTML = '';
+            let total = 0;
+        
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                cartItems.innerHTML += `
+                    <div class="product-item">
+                        <img src="${item.imgSrc}" alt="${item.name}">
+                        <div class="product-info">
+                            <p><strong>${item.name}</strong></p>
+                            <p>₹${item.price} x ${item.quantity}</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button onclick="updateCartItem('${item.name}', ${item.quantity - 1})">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateCartItem('${item.name}', ${item.quantity + 1})">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        
+            cartTotal.textContent = `Total: ₹${total}`;
+        }
+        
+        function openCart() {
+            updateCart();
+            document.getElementById('cart-dialog').style.display = 'flex';
+        }
+        
+        function closeCart() {
+            document.getElementById('cart-dialog').style.display = 'none';
+        }
+        
+    </script>        
+</body>
+<footer id="footer">
+    <div class="footer-section">
+        <h3>The Global Gateway</h3>
+        <p>Travel with us and explore the world without limits.</p>
+    </div>
+    <div class="footer-section">
+        <h3>About</h3>
+        <ul>
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#news-blog">News & Blog</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Contact</h3>
+        <ul>
+            <li><a href="#call-center">Call Center</a></li>
+            <li><a href="#support-center">Support Center</a></li>
+            <li><a href="#contact-us">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+            <li><a href="#privacy-policy">Privacy Policy</a></li>
+            <li><a href="#terms-services">Terms & Services</a></li>
+            <li><a href="#payments">Payments</a></li>
+        </ul>
+    </div>
+    <p>&copy; 2024 The Global Gateway. All rights reserved.</p>
+</footer>
+</html>
